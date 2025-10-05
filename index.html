@@ -3,46 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swasti Enterprise | Social Hub</title>
+    <title>Swasti Enterprise | Connect With Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
-        }
-        
-        .social-card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
+            background: #0a0a0a;
+            color: white;
         }
         
-        .container {
+        /* Animated Background */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 1200px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
         }
         
-        /* Logo Intro Animation */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Logo Intro */
         #logo-intro {
             position: fixed;
             top: 0;
@@ -53,129 +75,318 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100;
-            opacity: 1;
+            z-index: 1000;
+            transition: opacity 1s ease;
         }
         
-        .logo {
+        .logo-wrapper {
+            position: relative;
+            animation: logoEntry 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        @keyframes logoEntry {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        .logo-circle {
             width: 200px;
             height: 200px;
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            animation: pulse 2s infinite;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
-        .logo-inner {
-            width: 150px;
-            height: 150px;
+        .logo-circle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(255, 255, 255, 0.3), transparent 30%);
+            animation: rotate 3s linear infinite;
+        }
+        
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo-circle::after {
+            content: '';
+            position: absolute;
+            inset: 5px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
         }
         
-        /* Logo image style */
-        .logo-img {
-            width: 80%;
-            height: auto;
-            border-radius: 50%;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .logo-text {
+            position: relative;
+            z-index: 1;
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
         }
         
         /* Main Content */
         #main-content {
             display: none;
             opacity: 0;
-            width: 100%;
+            transition: opacity 1s ease;
+            min-height: 100vh;
+            padding: 40px 20px;
         }
         
-        .title {
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Header Section */
+        .header {
             text-align: center;
-            color: white;
-            margin-bottom: 40px;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease;
         }
         
-        .title h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .title p {
-            font-size: 1.2rem;
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: textGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes textGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.6)); }
+        }
+        
+        .header p {
+            font-size: 1.4rem;
             opacity: 0.9;
+            font-weight: 300;
         }
         
+        /* Social Grid */
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-            width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
         
         .social-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
             position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px 30px;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
-            height: 180px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: cardEntry 0.8s ease backwards;
         }
         
-        .social-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.15);
+        @keyframes cardEntry {
+            from { opacity: 0; transform: translateY(50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
-        .social-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: white;
-        }
+        .social-card:nth-child(1) { animation-delay: 0.1s; }
+        .social-card:nth-child(2) { animation-delay: 0.2s; }
+        .social-card:nth-child(3) { animation-delay: 0.3s; }
+        .social-card:nth-child(4) { animation-delay: 0.4s; }
+        .social-card:nth-child(5) { animation-delay: 0.5s; }
+        .social-card:nth-child(6) { animation-delay: 0.6s; }
         
-        .social-info {
+        .social-card::before {
+            content: '';
             position: absolute;
-            bottom: -50px;
-            left: 0;
-            width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent 30%
+            );
+            animation: cardRotate 4s linear infinite;
             opacity: 0;
+            transition: opacity 0.5s;
         }
         
-        .social-card:hover .social-info {
-            bottom: 0;
+        .social-card:hover::before {
             opacity: 1;
         }
         
-        .social-info p {
+        @keyframes cardRotate {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .social-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            z-index: 1;
+        }
+        
+        .card-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .social-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+        
+        .icon-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        
+        .social-card:hover .icon-wrapper {
+            transform: rotateY(360deg);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-icon {
+            font-size: 3rem;
             color: white;
-            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-card:hover .social-icon {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 20px currentColor);
+        }
+        
+        .social-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .social-info {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .social-card:hover .social-info {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+        
+        /* Color Themes for Each Platform */
+        .social-card[data-platform="Website"] .icon-wrapper { background: rgba(52, 152, 219, 0.2); }
+        .social-card[data-platform="Website"]:hover { border-color: #3498db; }
+        .social-card[data-platform="Website"] .social-icon { color: #3498db; }
+        
+        .social-card[data-platform="Facebook"] .icon-wrapper { background: rgba(24, 119, 242, 0.2); }
+        .social-card[data-platform="Facebook"]:hover { border-color: #1877f2; }
+        .social-card[data-platform="Facebook"] .social-icon { color: #1877f2; }
+        
+        .social-card[data-platform="WhatsApp"] .icon-wrapper { background: rgba(37, 211, 102, 0.2); }
+        .social-card[data-platform="WhatsApp"]:hover { border-color: #25d366; }
+        .social-card[data-platform="WhatsApp"] .social-icon { color: #25d366; }
+        
+        .social-card[data-platform="Instagram"] .icon-wrapper { background: rgba(225, 48, 108, 0.2); }
+        .social-card[data-platform="Instagram"]:hover { border-color: #e1306c; }
+        .social-card[data-platform="Instagram"] .social-icon { color: #e1306c; }
+        
+        .social-card[data-platform="YouTube"] .icon-wrapper { background: rgba(255, 0, 0, 0.2); }
+        .social-card[data-platform="YouTube"]:hover { border-color: #ff0000; }
+        .social-card[data-platform="YouTube"] .social-icon { color: #ff0000; }
+        
+        .social-card[data-platform="Email"] .icon-wrapper { background: rgba(234, 67, 53, 0.2); }
+        .social-card[data-platform="Email"]:hover { border-color: #ea4335; }
+        .social-card[data-platform="Email"] .social-icon { color: #ea4335; }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            animation: fadeInUp 1s ease 2s backwards;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        
+        .mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mouse:hover {
+            border-color: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        
+        .mouse::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: white;
+            border-radius: 2px;
+            animation: scroll 2s infinite;
+        }
+        
+        @keyframes scroll {
+            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
         }
         
         /* Fallback Page */
@@ -185,255 +396,254 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 90;
+            z-index: 999;
             opacity: 0;
             pointer-events: none;
+            transition: opacity 0.5s ease;
         }
         
         .fallback-content {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 30px;
             text-align: center;
             max-width: 500px;
             width: 90%;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        .fallback-logo {
-            width: 100px;
-            height: 100px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 20px;
+        #fallback-page.active {
+            opacity: 1;
+            pointer-events: all;
         }
         
-        .fallback-logo-inner {
-            width: 75px;
-            height: 75px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
+        #fallback-page.active .fallback-content {
+            transform: scale(1);
+        }
+        
+        .fallback-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
         
         .fallback-content h2 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
         
         .fallback-content p {
-            color: white;
-            margin-bottom: 25px;
             font-size: 1.1rem;
-            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.8;
         }
         
         .return-btn {
-            background: white;
-            color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 15px 40px;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
         
         .return-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
         }
-
-        /* Paragraph */
-        .social-grid .social-card p{
-             position:relative;
-             left:-10px;
-        }
-
         
         /* Responsive Design */
         @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
             .social-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 15px;
-            }
-            
-            .title h1 {
-                font-size: 2rem;
-            }
-            
-            .title p {
-                font-size: 1rem;
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .social-card {
-                height: 160px;
-                padding: 20px;
+                padding: 30px 20px;
+            }
+            
+            .icon-wrapper {
+                width: 80px;
+                height: 80px;
             }
             
             .social-icon {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
         }
         
         @media (max-width: 480px) {
-            .social-grid {
-                grid-template-columns: 1fr;
+            .header h1 {
+                font-size: 2rem;
             }
             
-            .title h1 {
-                font-size: 1.8rem;
-            }
-            
-            .logo {
+            .logo-circle {
                 width: 150px;
                 height: 150px;
             }
             
-            .logo-inner {
-                width: 110px;
-                height: 110px;
-                font-size: 18px;
+            .logo-text {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Logo Intro -->
-        <div id="logo-intro">
-            <div class="logo">
-                <img src="logo.png" alt="Swasti Enterprise Logo" class="logo-img">
+    <!-- Animated Background -->
+    <div class="bg-container"></div>
+    <div class="particles" id="particles"></div>
+    
+    <!-- Logo Intro -->
+    <div id="logo-intro">
+        <div class="logo-wrapper">
+            <div class="logo-circle">
+                <div class="logo-text">SE</div>
             </div>
         </div>
-        
-        <!-- Main Content -->
-        <div id="main-content">
-            <div class="title">
+    </div>
+    
+    <!-- Main Content -->
+    <div id="main-content">
+        <div class="container">
+            <div class="header">
                 <h1>Connect With Us</h1>
-                <p>Follow our journey on social media</p>
+                <p>Follow our journey across the digital universe</p>
             </div>
-
             
             <div class="social-grid">
-
                 <!-- Website -->
                 <div class="social-card" data-platform="Website" data-link="https://swastiagarbatti.ct.ws/">
-                    <i class="social-icon fas fa-globe"></i>
-                    <h3>Website</h3>
-                    <div class="social-info">
-                        <p>Visit our website</p>
-                    </div>
-                </div>
-
-                <!-- Facebook -->
-                <div class="social-card" data-platform="Facebook" data-link="#">
-                    <i class="social-icon fab fa-facebook"></i>
-                    <h3>Facebook</h3>
-                    <div class="social-info">
-                        <p>@example</p>
+                    <div class="card-content">
+                        <div class="icon-wrapper">
+                            <i class="social-icon fas fa-globe"></i>
+                        </div>
+                        <h3>Website</h3>
+                        <p class="social-info">Visit our official website</p>
                     </div>
                 </div>
                 
-               <!-- WhatsApp -->
-               <div class="social-card" data-platform="WhatsApp" data-link="https://wa.me/919088875282">
-                   <i class="social-icon fab fa-whatsapp"></i>
-                   <h3>WhatsApp</h3>
-                   <div class="social-info">
-                       <p>+91 9088875282</p>
-                   </div>
-               </div>
-
-               <!-- Instagram -->
+                <!-- Facebook -->
+                <div class="social-card" data-platform="Facebook" data-link="#">
+                    <div class="card-content">
+                        <div class="icon-wrapper">
+                            <i class="social-icon fab fa-facebook"></i>
+                        </div>
+                        <h3>Facebook</h3>
+                        <p class="social-info">Connect on Facebook</p>
+                    </div>
+                </div>
+                
+                <!-- WhatsApp -->
+                <div class="social-card" data-platform="WhatsApp" data-link="https://wa.me/919088875282">
+                    <div class="card-content">
+                        <div class="icon-wrapper">
+                            <i class="social-icon fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p class="social-info">+91 9088875282</p>
+                    </div>
+                </div>
+                
+                <!-- Instagram -->
                 <div class="social-card" data-platform="Instagram" data-link="https://www.instagram.com/swastienterprise.agarbatti?igsh=bjJhMW5ydHdxcDZu">
-                    <i class="social-icon fab fa-instagram"></i>
-                    <h3>Instagram</h3>
-                    <div class="social-info">
-                        <p>@swastienterprise.agarbatti</p>
+                    <div class="card-content">
+                        <div class="icon-wrapper">
+                            <i class="social-icon fab fa-instagram"></i>
+                        </div>
+                        <h3>Instagram</h3>
+                        <p class="social-info">@swastienterprise.agarbatti</p>
                     </div>
                 </div>
                 
                 <!-- YouTube -->
                 <div class="social-card" data-platform="YouTube" data-link="https://www.youtube.com/@seagarbatti">
-                    <i class="social-icon fab fa-youtube"></i>
-                    <h3>YouTube</h3>
-                    <div class="social-info">
-                        <p>Subscribe to our channel</p>
+                    <div class="card-content">
+                        <div class="icon-wrapper">
+                            <i class="social-icon fab fa-youtube"></i>
+                        </div>
+                        <h3>YouTube</h3>
+                        <p class="social-info">Subscribe to our channel</p>
                     </div>
                 </div>
-
-                  <!-- Email Card - Opens Gmail Compose -->
-            <div class="social-card" data-platform="Email" data-link="https://mail.google.com/mail/?view=cm&fs=1&to=swastienterprise.agarbatti@gmail.com" 
-             onclick="window.open(this.getAttribute('data-link'), '_blank')" style="cursor:pointer;">
-              <i class="social-icon fas fa-envelope"></i>
-             <h3>Email</h3>
-            <div class="social-info">
-                 <p>swastienterprise.agarbatti@gmail.com</p>
-            </div>
-            </div>
-
-
-                <!-- Telegram 
-                <div class="social-card" data-platform="Telegram" data-link="#">
-                    <i class="social-icon fab fa-telegram"></i>
-                    <h3>Telegram</h3>
-                    <div class="social-info">
-                        <p>Join our channel</p>
-                    </div>
-                </div>
-
-                //Twitter
-                <div class="social-card" data-platform="Twitter" data-link="#">
-                    <i class="social-icon fab fa-twitter"></i>
-                    <h3>Twitter</h3>
-                    <div class="social-info">
-                        <p>@example</p>
+                
+                <!-- Email -->
+                <div class="social-card" data-platform="Email" data-link="https://mail.google.com/mail/?view=cm&fs=1&to=swastienterprise.agarbatti@gmail.com">
+                    <div class="card-content">
+                        <div class="icon-wrapper">
+                            <i class="social-icon fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p class="social-info">swastienterprise.agarbatti@gmail.com</p>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         
-        <!-- Fallback Page -->
-        <div id="fallback-page">
-            <div class="fallback-content">
-                <div class="fallback-logo">
-                    <img src="logo.png" alt="Swasti Enterprise Logo" class="logo-img">
-                </div>
-                <h2>Oops!</h2>
-                <p id="fallback-message">Sorry, we are not on this platform right now.</p>
-                <button class="return-btn">Return Home</button>
-            </div>
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </div>
+    
+    <!-- Fallback Page -->
+    <div id="fallback-page">
+        <div class="fallback-content">
+            <div class="fallback-icon">😔</div>
+            <h2>Oops!</h2>
+            <p id="fallback-message">Sorry, we are not on this platform right now.</p>
+            <button class="return-btn">Return Home</button>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 5 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Logo intro animation
+        function handleLogoIntro() {
             const logoIntro = document.getElementById('logo-intro');
             const mainContent = document.getElementById('main-content');
-            const fallbackPage = document.getElementById('fallback-page');
-            const fallbackMessage = document.getElementById('fallback-message');
-            const returnBtn = document.querySelector('.return-btn');
-            const socialCards = document.querySelectorAll('.social-card');
             
-            // Handle logo intro animation
             setTimeout(() => {
                 logoIntro.style.opacity = '0';
                 setTimeout(() => {
@@ -444,41 +654,112 @@
                     }, 50);
                 }, 1000);
             }, 2500);
+        }
+        
+        // Handle social card clicks
+        function setupSocialCards() {
+            const socialCards = document.querySelectorAll('.social-card');
+            const fallbackPage = document.getElementById('fallback-page');
+            const fallbackMessage = document.getElementById('fallback-message');
             
-            // Handle social card clicks
             socialCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const platform = this.getAttribute('data-platform');
                     const link = this.getAttribute('data-link');
                     
                     if (link === '#' || !link) {
-                        // Show fallback page
                         fallbackMessage.textContent = `Sorry, we are not on ${platform} right now.`;
-                        fallbackPage.style.opacity = '1';
-                        fallbackPage.style.pointerEvents = 'all';
-                        document.querySelector('.fallback-content').style.transform = 'scale(1)';
-                    } else if (link.startsWith('mailto:')) {
-                        // Handle email links - this should work now
-                        window.location.href = link;
+                        fallbackPage.classList.add('active');
                     } else {
-                        // Redirect to actual link
                         window.open(link, '_blank');
                     }
                 });
             });
+        }
+        
+        // Handle return button
+        function setupReturnButton() {
+            const returnBtn = document.querySelector('.return-btn');
+            const fallbackPage = document.getElementById('fallback-page');
             
-            // Handle return button click
             returnBtn.addEventListener('click', function() {
-                fallbackPage.style.opacity = '0';
-                document.querySelector('.fallback-content').style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    fallbackPage.style.pointerEvents = 'none';
-                }, 500);
+                fallbackPage.classList.remove('active');
             });
+        }
+        
+        // Mouse cursor effect
+        function setupCursorEffect() {
+            document.addEventListener('mousemove', (e) => {
+                const cursor = document.createElement('div');
+                cursor.style.position = 'fixed';
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                cursor.style.width = '5px';
+                cursor.style.height = '5px';
+                cursor.style.background = 'rgba(255, 255, 255, 0.5)';
+                cursor.style.borderRadius = '50%';
+                cursor.style.pointerEvents = 'none';
+                cursor.style.zIndex = '9999';
+                cursor.style.transition = 'all 0.5s ease';
+                document.body.appendChild(cursor);
+                
+                setTimeout(() => {
+                    cursor.style.opacity = '0';
+                    cursor.style.transform = 'scale(2)';
+                }, 100);
+                
+                setTimeout(() => {
+                    cursor.remove();
+                }, 600);
+            });
+        }
+        
+        // Scroll indicator click
+        function setupScrollIndicator() {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            scrollIndicator.addEventListener('click', () => {
+                window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // 3D tilt effect on cards
+        function setup3DTilt() {
+            const cards = document.querySelectorAll('.social-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.05)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        }
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            handleLogoIntro();
+            setupSocialCards();
+            setupReturnButton();
+            setupCursorEffect();
+            setupScrollIndicator();
+            setup3DTilt();
         });
     </script>
 </body>
 </html>
-
-
-
