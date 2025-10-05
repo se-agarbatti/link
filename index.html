@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon"  href="favicon.ico"> 
-    <title>Swasti Enterprise</title>
+    <title>Swasti Enterprise | Connect With Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -473,37 +472,110 @@
         }
         
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .social-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 25px;
+                padding: 0 15px;
+            }
+        }
+        
         @media (max-width: 768px) {
+            body {
+                padding: 0 15px;
+            }
+            
+            .header {
+                margin-bottom: 50px;
+                padding: 0 10px;
+            }
+            
             .header h1 {
                 font-size: 2.5rem;
+                line-height: 1.2;
             }
             
             .header p {
-                font-size: 1.1rem;
+                font-size: 1rem;
+                padding: 0 10px;
             }
             
             .social-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 25px;
+                padding: 0 10px;
             }
             
             .social-card {
-                padding: 30px 20px;
+                padding: 35px 25px;
+                min-height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .card-content {
+                width: 100%;
             }
             
             .icon-wrapper {
-                width: 80px;
-                height: 80px;
+                width: 90px;
+                height: 90px;
+                margin-bottom: 20px;
             }
             
             .social-icon {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+            }
+            
+            .social-card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+                word-wrap: break-word;
+                max-width: 100%;
+            }
+            
+            .social-info {
+                font-size: 0.95rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                max-width: 100%;
+                padding: 0 10px;
+                line-height: 1.5;
+            }
+            
+            .fallback-content {
+                padding: 40px 25px;
+                margin: 0 15px;
+            }
+            
+            .fallback-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .fallback-content p {
+                font-size: 1rem;
+                word-wrap: break-word;
+                line-height: 1.6;
             }
         }
         
         @media (max-width: 480px) {
+            #main-content {
+                padding: 30px 10px;
+            }
+            
             .header h1 {
                 font-size: 2rem;
+                padding: 0 5px;
+            }
+            
+            .header p {
+                font-size: 0.95rem;
             }
             
             .logo-circle {
@@ -513,6 +585,76 @@
             
             .logo-text {
                 font-size: 24px;
+            }
+            
+            .social-grid {
+                gap: 20px;
+                padding: 0 5px;
+            }
+            
+            .social-card {
+                padding: 30px 20px;
+                min-height: 180px;
+            }
+            
+            .icon-wrapper {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 18px;
+            }
+            
+            .social-icon {
+                font-size: 2.5rem;
+            }
+            
+            .social-card h3 {
+                font-size: 1.3rem;
+                margin-bottom: 10px;
+            }
+            
+            .social-info {
+                font-size: 0.85rem;
+                padding: 0 5px;
+            }
+            
+            .fallback-content {
+                padding: 35px 20px;
+                margin: 0 10px;
+            }
+            
+            .fallback-icon {
+                font-size: 3rem;
+            }
+            
+            .fallback-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .fallback-content p {
+                font-size: 0.9rem;
+            }
+            
+            .return-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .scroll-indicator {
+                bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .social-card {
+                padding: 25px 15px;
+            }
+            
+            .social-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .social-info {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -764,4 +906,3 @@
     </script>
 </body>
 </html>
-
